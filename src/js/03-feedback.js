@@ -2,7 +2,8 @@ const throttle = require('lodash.throttle');
 let obj;
 const form = document.querySelector("form")
   
-form.addEventListener("input",throttle(createData,500));
+form.addEventListener("input", throttle(createData, 500));
+
 form.addEventListener("submit", submitForm);
 
 function createData(e) {
@@ -15,12 +16,19 @@ function createData(e) {
 
 function submitForm(e) {
     e.preventDefault();
-    if (obj["email"]) {
-     console.log(obj);   
-    }
+    valid()
     e.currentTarget.reset()
     localStorage.clear()
     obj={}
+}
+
+function valid() {
+  if (!obj["email"]||!obj["message"]) {
+     alert("Заповніть ,будь ласка,форму")
+    } else {
+           console.log(obj);  
+    }
+
 }
 
 function isValue(obj) {
